@@ -48,8 +48,8 @@ void context_switch(pthread_t tid)
         sem_post(&sem_scheduling);
 
         // pause current thread
-        pause();
-        // sigwait(&set, &snum);   
+        // pause();
+        sigwait(&set, &snum);  
         // NOTE: using sigwait instead of pause to take more controle on signals
     }
        
