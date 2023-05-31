@@ -9,6 +9,7 @@
 #include "time.h"
 #include "stats.h"
 #include "utils.h"
+#include "proc_interrupt.h"
 #include "scheduler.h"
 
 extern int NPROC;
@@ -48,16 +49,9 @@ void * scheduling_thread()
                 
                 printf("%s SCHED -> Interrupcao ocorreu para o processo %d\n", event(), p->pid);
 
-                // insere o processo no final da fila de aptos
-                enqueue(ready, p);
-
-                // alterando o status para apto
-                p->state = READY;
-
-                // Realizando as estatisticas para o processo que 
-                // entra na fila de aptos
-                count_ready_in(p);
-            }
+                // definindo o que fazer com o processo ao voltar de bloqueado
+                proc_interrupt(p);
+           }
             else
             {
                 // TODO: isso deveria gerar um event_num?

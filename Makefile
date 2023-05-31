@@ -1,7 +1,6 @@
 
 OBJS = main.o \
 	   proc.o \
-	   proc_init.o \
 	   queue.o \
 	   sched.o \
 	   utils.o \
@@ -13,20 +12,20 @@ default: fifo
 
 all: fifo sjf ljf prio_static prio_dynamic
 
-fifo: $(OBJS) scheduler_fifo.o
-	gcc -pthread $(OBJS) scheduler_fifo.o -o main_fifo
+fifo: $(OBJS) scheduler_fifo.o proc_init.o proc_interrupt.o
+	gcc -pthread $(OBJS) scheduler_fifo.o proc_init.o proc_interrupt.o -o main_fifo
 
-sjf: $(OBJS) scheduler_sjf.o
-	gcc -pthread $(OBJS) scheduler_sjf.o -o main_sjf
+sjf: $(OBJS) scheduler_sjf.o proc_init.o proc_interrupt.o
+	gcc -pthread $(OBJS) scheduler_sjf.o proc_init.o proc_interrupt.o -o main_sjf
 
-ljf: $(OBJS) scheduler_ljf.o
-	gcc -pthread $(OBJS) scheduler_ljf.o -o main_ljf
+ljf: $(OBJS) scheduler_ljf.o proc_init.o proc_interrupt.o
+	gcc -pthread $(OBJS) scheduler_ljf.o proc_init.o proc_interrupt.o -o main_ljf
 
-prio_static: $(OBJS) scheduler_prio_static.o
-	gcc -pthread $(OBJS) scheduler_prio_static.o -o main_prio_static
+prio_static: $(OBJS) scheduler_prio_static.o proc_init_prio_static.o proc_interrupt_prio_static.o
+	gcc -pthread $(OBJS) scheduler_prio_static.o proc_init_prio_static.o proc_interrupt_prio_static.o -o main_prio_static
 
-prio_dynamic: $(OBJS) scheduler_prio_dynamic.o
-	gcc -pthread $(OBJS) scheduler_prio_dynamic.o -o main_prio_dynamic
+prio_dynamic: $(OBJS) scheduler_prio_dynamic.o proc_init.o proc_interrupt.o
+	gcc -pthread $(OBJS) scheduler_prio_dynamic.o proc_init.o proc_interrupt.o -o main_prio_dynamic
 
 main.o: main.c
 	gcc -c main.c
@@ -36,6 +35,15 @@ proc.o: proc.c proc.h
 
 proc_init.o: proc_init.c proc_init.h
 	gcc -c proc_init.c
+
+proc_init_prio_static.o: proc_init_prio_static.c proc_init.h
+	gcc -c proc_init_prio_static.c
+
+proc_interrupt.o: proc_interrupt.c proc_interrupt.h
+	gcc -c proc_interrupt.c
+
+proc_interrupt_prio_static.o: proc_interrupt_prio_static.c proc_interrupt.h
+	gcc -c proc_interrupt_prio_static.c
 
 queue.o: queue.c queue.h
 	gcc -c queue.c
