@@ -55,8 +55,8 @@ void * process_thread(void * procp)
 
     // A thread do processo inicia em pausa, 
     // para simular a espera na fila de aptos (ready)
-    // pause();
-    sigwait(&set, &snum);
+    pause();
+    // sigwait(&set, &snum);
 
     // TODO: Ao receber o comando da primeira execução, 
     // TODO: o processo iniciará a partir deste ponto
