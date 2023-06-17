@@ -126,6 +126,9 @@ int main (int argc, char *argv[])
     // FIX: debug?
     printf(">> MAIN - imprimindo fila 'ready':\n");
     printqueue(ready);
+
+    printf(">> MAIN - imprimindo fila 'ready2':\n");
+    printqueue(ready2);
     
     // printf("main: fila blocked:\n");
     // printqueue(blocked);
