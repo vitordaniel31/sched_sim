@@ -5,7 +5,7 @@ mostrar_mensagem_uso() {
     echo "Uso:"
     echo "  $0 [algoritmo] [num_processos] [valor_capturado]"
     echo ""
-    echo "  Executa o [algorito] 10 vezes com [num_processos] processos e salva os tempos de execução do tipo [valor_capturado] em um arquivo de texto"
+    echo "  Executa o [algorito] 100 vezes com [num_processos] processos e salva os tempos de execução do tipo [valor_capturado] em um arquivo de texto"
     echo ""
     echo "Parâmetros:"
     echo "  algoritmo: fifo | ljf | prio_dynamic | prio_static | sjf"
@@ -33,7 +33,7 @@ pasta_saida="dados_execucao/$1"
 arquivo_saida="$3_$2.txt"
 
 # Loop para executar o arquivo C 10 vezes
-for ((i=1; i<= 10; i++))
+for ((i=1; i<= 100; i++))
 do
     # Executa o arquivo C e redireciona a saída para o arquivo de saída
     mkdir -p "$pasta_saida" &&
