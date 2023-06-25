@@ -22,7 +22,7 @@ with open(sys.argv[1], 'r') as arquivo:
         # Verifica se a linha contém um valor numérico
         if linha.replace('.', '', 1).isdigit():
             # Adiciona o valor à soma
-            valores.append(float(linha))
+            valores.append(float(linha)/1000)
 
 # Verifica se foram encontrados valores numéricos no arquivo
 if len(valores) == 0:
